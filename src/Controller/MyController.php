@@ -64,21 +64,9 @@ class MyController extends AbstractController
         $myPhoto = $em->getRepository(Photo::class)->find($id);
 
             if ($this->getUser() == $myPhoto->getUser()) {
-                //  $fileMenager = new FileManager();
-                // $fileMenager->remove('images/hosting'.$myPhoto->getFilename());
                 $em->remove($myPhoto);
                 $em->flush();
                 $this->addFlash('succes', "Usunięto zdjęcie");
-                /**
-                 * if($fileMenager->fileExists('images/hosting/'.$myPhoto->getFilename())){
-                 * $this->addFlash("error", "błąd w czasie usuwania pliku");
-                 * }else{
-                 * $em->remove($myPhoto);
-                 * $em->flush();
-                 * $this->addFlash('succes', "Usunieto zdjęcie");
-                 *
-                 * }
-                 */
             } else {
                 $this->addFlash('error', "Nie możesz usunąć zdjęcia innego użytkownika");
             }
